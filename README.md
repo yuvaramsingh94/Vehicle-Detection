@@ -10,7 +10,7 @@
 * lableing of the feature vectors of hte car and non car images (1 for car and 0 for noncar)
 * training a Linear SVC classifier using these feature vector
 
-### Detection process
+#### Detection process
 
 * cropping of the test image into small windows based on scale size (pref various scale size)
 * resize and feature extraction from the cropped windows (Note : the extracted feature should match the length of the feature vector used to train our model)
