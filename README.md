@@ -1,18 +1,23 @@
-##Writeup Template
-###You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
-
----
 
 **Vehicle Detection Project**
 
-The goals / steps of this project are the following:
+## The steps of this project are the following:
 
-* Perform a Histogram of Oriented Gradients (HOG) feature extraction on a labeled training set of images and train a classifier Linear SVM classifier
-* Optionally, you can also apply a color transform and append binned color features, as well as histograms of color, to your HOG feature vector. 
-* Note: for those first two steps don't forget to normalize your features and randomize a selection for training and testing.
-* Implement a sliding-window technique and use your trained classifier to search for vehicles in images.
-* Run your pipeline on a video stream (start with the test_video.mp4 and later implement on full project_video.mp4) and create a heat map of recurring detections frame by frame to reject outliers and follow detected vehicles.
-* Estimate a bounding box for vehicles detected.
+#### Training process
+
+* feature extraction of the training image (Histogram of oriented gradience , Histogram of color , raw pixel values)
+* scaling of the feature vector to remove a certain feature from dominating the entire prediction process 
+* lableing of the feature vectors of hte car and non car images (1 for car and 0 for noncar)
+* training a Linear SVC classifier using these feature vector
+
+### Detection process
+
+* cropping of the test image into small windows based on scale size (pref various scale size)
+* resize and feature extraction from the cropped windows (Note : the extracted feature should match the length of the feature vector used to train our model)
+* run the prediction on all the windows taken from this single image and mark those windows where our classifier thinks it has a car image
+* generate a heat map from those windows 
+* create a bounding box based on the heat map 
+* lable the car using a bounding box and return a video 
 
 [//]: # (Image References)
 [image1]: ./examples/car_not_car.png
@@ -38,8 +43,9 @@ You're reading it!
 
 ####1. Explain how (and identify where in your code) you extracted HOG features from the training images.
 
-The code for this step is contained in the first code cell of the IPython notebook (or in lines # through # of the file called `some_file.py`).  
+At 6th block of my code , i defined a function to find the HOG of the image , along with HOG i also used raw pixel values and histogram of color also as a feature to detect vehicles 
 
+At 
 I started by reading in all the `vehicle` and `non-vehicle` images.  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
 
 ![alt text][image1]
