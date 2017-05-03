@@ -45,37 +45,44 @@ You're reading it!
 
 At 6th block of my code , i defined a function to find the HOG of the image , along with HOG i also used raw pixel values and histogram of color also as a feature to detect vehicles 
 
-At 
-I started by reading in all the `vehicle` and `non-vehicle` images.  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
+At th 17th block of my code , i started importing the training image into my program . using the function extractFeatures , i started to extract the features (HOG , color hist , bin) and storing them as a single dimentional vectors
+
+
+Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
 
 ![alt text][image1]
 
-I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I grabbed random images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like.
+i used skimage.feature.hog function to calculate the HOG of a image . my parameters where 
 
-Here is an example using the `YCrCb` color space and HOG parameters of `orientations=8`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
+* orient = 9
+* pix_per_cell = 8
+* cell_per_block = 2
+
+Here is an example using the `YCrCb` color space and HOG parameters of `orientations=9`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
 
 
 ![alt text][image2]
 
 ####2. Explain how you settled on your final choice of HOG parameters.
 
-I tried various combinations of parameters and...
+I tried various combinations of parameters in trail and error method . finally i setteld for these parameters becouse these seems to work fine for me
 
 ####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
-I trained a linear SVM using...
+I trained a linear SVM using HOG , hist of color feature  at 20th block of my code .After a lot of trail methods , i setteled with 100 as the C value for Linear SVM 
+
 
 ###Sliding Window Search
 
 ####1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
-I decided to search random window positions at random scales all over the image and came up with this (ok just kidding I didn't actually ;):
+At 16th block , i defined a function called find_cars where i implemented the window search methods . when comming to scale , i did trail and error method to find the scaling values and landed on these values . they provide me a good traadeoff between time to process the image and Detecting car percentage 
 
 ![alt text][image3]
 
 ####2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
-Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
+i used 7 different scaling factors to get a decent coverage of the image . this led me to higher time consumption when come to predict the image . here are some test iamges where i marked the bounding box in the image
 
 ![alt text][image4]
 ---
@@ -110,5 +117,7 @@ Here's an example result showing the heatmap from a series of frames of video, t
 
 ####1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+* cars that are appearing on the near end of both right and left side pose a hard time to detect the presence of car
+* takes a lot of time for video generation . this is due to the usage of multiple window size
+* few false positive detedtions appears in the final output even after the implimentations of filters
 
